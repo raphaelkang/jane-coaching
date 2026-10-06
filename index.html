@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jane Neoh — Executive & Personal Development Coach</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FAF6F0;
+    --sand:#EFE3D3;
+    --terracotta:#C97B4A;
+    --walnut:#8A5A44;
+    --ink:#3A2E28;
+    --muted:#6B5A4E;
+    --line: rgba(58,46,40,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    color:var(--ink);
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .wrap{max-width:1120px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--walnut);
+    font-weight:600;
+  }
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--terracotta);
+    outline-offset:3px;
+  }
+
+  /* ---------- signature ring motif ---------- */
+  .ring-motif{
+    position:absolute;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(250,246,240,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 32px;
+    max-width:1120px; margin:0 auto;
+  }
+  .brand{
+    font-family:'Fraunces', serif;
+    font-size:19px;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+  .navlinks{
+    display:flex; gap:36px;
+    font-size:14.5px;
+    font-weight:500;
+    color:var(--muted);
+  }
+  .navlinks a{ text-decoration:none; transition:color .2s; }
+  .navlinks a:hover{ color:var(--terracotta); }
+  .nav-cta{
+    background:var(--ink);
+    color:var(--cream);
+    padding:10px 20px;
+    border-radius:100px;
+    font-size:14px;
+    font-weight:600;
+    text-decoration:none;
+    white-space:nowrap;
+    transition:background .2s;
+  }
+  .nav-cta:hover{ background:var(--terracotta); }
+  @media (max-width: 780px){
+    .navlinks{display:none;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:88px 0 100px;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.05fr 0.85fr;
+    gap:56px;
+    align-items:center;
+    position:relative;
+    z-index:1;
+  }
+  .hero-eyebrow{ margin-bottom:22px; }
+  .hero h1{
+    font-size:clamp(34px, 4.6vw, 54px);
+    line-height:1.09;
+    margin-bottom:24px;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--terracotta);
+  }
+  .hero p.lede{
+    font-size:18px;
+    color:var(--muted);
+    max-width:480px;
+    margin-bottom:34px;
+  }
+  .cta-row{ display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .btn-primary{
+    display:inline-block;
+    background:var(--terracotta);
+    color:var(--cream);
+    padding:15px 30px;
+    border-radius:100px;
+    font-weight:600;
+    font-size:15px;
+    text-decoration:none;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .btn-primary:hover{ background:var(--ink); transform:translateY(-1px); }
+  .cta-sub{ font-size:13.5px; color:var(--muted); }
+
+  .hero-photo-wrap{
+    position:relative;
+    display:flex;
+    justify-content:center;
+  }
+  .hero-photo{
+    position:relative;
+    width:min(340px, 90%);
+    aspect-ratio: 4/5;
+    border-radius: 4px 90px 4px 90px;
+    overflow:hidden;
+    box-shadow: 0 30px 60px -20px rgba(58,46,40,0.35);
+    z-index:2;
+  }
+  .hero-photo img{
+    width:100%; height:100%; object-fit:cover;
+  }
+
+  /* ---------- section shell ---------- */
+  section{ padding:96px 0; position:relative; }
+  .tint{ background:var(--sand); }
+  .section-head{ max-width:640px; margin-bottom:56px; }
+  .section-head h2{ font-size:clamp(28px,3.4vw,38px); margin-top:14px; line-height:1.18; }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about-copy p{ margin-bottom:20px; color:var(--muted); font-size:16.5px; }
+  .about-copy p.lead-line{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:22px;
+    color:var(--ink);
+    line-height:1.5;
+    margin-bottom:28px;
+  }
+  .quals{
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:30px 32px;
+  }
+  .quals h3{
+    font-size:15px;
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    letter-spacing:0.02em;
+    text-transform:uppercase;
+    color:var(--walnut);
+    margin-bottom:18px;
+  }
+  .quals ul{ list-style:none; }
+  .quals li{
+    display:flex;
+    gap:12px;
+    padding:11px 0;
+    border-top:1px solid var(--line);
+    font-size:15px;
+    color:var(--ink);
+  }
+  .quals li:first-child{ border-top:none; }
+  .quals li .dot{
+    flex:none;
+    width:6px; height:6px; border-radius:50%;
+    background:var(--terracotta);
+    margin-top:8px;
+  }
+
+  /* ---------- process ---------- */
+  .process-flow{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:40px;
+  }
+  .process-flow::before{
+    content:"";
+    position:absolute;
+    top:22px; left:8%; right:8%;
+    height:1px;
+    background:repeating-linear-gradient(to right, var(--walnut) 0 8px, transparent 8px 16px);
+    opacity:0.35;
+    z-index:0;
+  }
+  .process-step{ position:relative; z-index:1; }
+  .step-index{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:15px;
+    color:var(--terracotta);
+    background:var(--cream);
+    display:inline-block;
+    padding-right:10px;
+  }
+  .tint .step-index{ background:var(--sand); }
+  .process-step h3{
+    font-size:20px;
+    margin:14px 0 10px;
+  }
+  .process-step p{ color:var(--muted); font-size:15px; }
+  @media (max-width:780px){
+    .process-flow{ grid-template-columns:1fr; gap:32px; }
+    .process-flow::before{ display:none; }
+  }
+
+  /* ---------- who it's for ---------- */
+  .for-grid{
+    display:grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap:56px;
+    align-items:start;
+  }
+  .for-list{ list-style:none; display:flex; flex-direction:column; gap:22px; }
+  .for-list li{
+    display:flex; gap:16px; align-items:flex-start;
+    font-size:16.5px;
+    color:var(--ink);
+  }
+  .ring-icon{
+    flex:none;
+    width:22px; height:22px;
+    border-radius:50%;
+    border:2px solid var(--terracotta);
+    position:relative;
+    margin-top:3px;
+  }
+  .ring-icon::after{
+    content:"";
+    position:absolute; inset:5px;
+    border-radius:50%;
+    background:var(--terracotta);
+    opacity:0.5;
+  }
+  .for-note{
+    background:var(--ink);
+    color:var(--cream);
+    border-radius:16px;
+    padding:36px;
+  }
+  .for-note p.eyebrow{ color:var(--terracotta); margin-bottom:14px; }
+  .for-note p{ font-size:15.5px; color:rgba(250,246,240,0.82); line-height:1.7; }
+
+  /* ---------- offers ---------- */
+  .offer-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+  .offer-card{
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:38px;
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+  }
+  .offer-card.featured{
+    background:var(--ink);
+    color:var(--cream);
+    border-color:var(--ink);
+  }
+  .offer-card .eyebrow{ color:var(--terracotta); }
+  .offer-card h3{ font-size:24px; }
+  .offer-card.featured h3{ color:var(--cream); }
+  .offer-card p{ color:var(--muted); font-size:15px; flex:1; }
+  .offer-card.featured p{ color:rgba(250,246,240,0.78); }
+  .offer-link{
+    font-size:14.5px;
+    font-weight:600;
+    text-decoration:none;
+    color:var(--terracotta);
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .offer-card.featured .offer-link{ color:var(--cream); }
+  @media (max-width:780px){ .offer-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- testimonials ---------- */
+  .testi-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:28px;
+  }
+  .testi-card{
+    background:var(--cream);
+    border-radius:16px;
+    padding:30px;
+    border:1px solid var(--line);
+  }
+  .testi-card p.quote{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:17px;
+    line-height:1.6;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+  .testi-card p.attr{
+    font-size:13.5px;
+    color:var(--muted);
+    font-weight:500;
+  }
+  .placeholder-flag{
+    font-size:11px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    font-weight:700;
+    margin-top:10px;
+    display:block;
+  }
+  @media (max-width:780px){ .testi-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- final cta ---------- */
+  .final-cta{
+    text-align:center;
+    padding:110px 0 120px;
+    position:relative;
+    overflow:hidden;
+  }
+  .final-cta h2{
+    font-size:clamp(30px,4vw,46px);
+    max-width:640px;
+    margin:0 auto 20px;
+    line-height:1.15;
+  }
+  .final-cta p{
+    color:var(--muted);
+    max-width:460px;
+    margin:0 auto 36px;
+    font-size:16.5px;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:36px 0;
+  }
+  .footer-row{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size:13.5px; color:var(--muted); flex-wrap:wrap; gap:12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand">Jane Neoh</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#process">How it works</a>
+      <a href="#for">Who it's for</a>
+      <a href="#offers">Coaching</a>
+      <a href="#testimonials">Stories</a>
+    </div>
+    <a class="nav-cta" href="#cta">Book a call</a>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <svg class="ring-motif" style="top:-60px; left:-120px; width:420px; height:420px; opacity:0.5;" viewBox="0 0 400 400" fill="none">
+    <circle cx="200" cy="200" r="198" stroke="#C97B4A" stroke-opacity="0.18" stroke-width="1"/>
+    <circle cx="200" cy="200" r="150" stroke="#8A5A44" stroke-opacity="0.16" stroke-width="1"/>
+    <circle cx="200" cy="200" r="100" stroke="#C97B4A" stroke-opacity="0.22" stroke-width="1"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow hero-eyebrow">Executive &amp; Personal Development Coach</p>
+      <h1>Sustainable growth comes from becoming <em>more fully who you already are.</em></h1>
+      <p class="lede">I work with leaders, professionals and individuals who want to think more clearly, communicate more effectively, and lead with greater confidence and self-awareness.</p>
+      <div class="cta-row">
+        <a class="btn-primary" href="#cta">Book a discovery call</a>
+        <span class="cta-sub">20+ years coaching &amp; training · ICF accredited</span>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <svg class="ring-motif" style="top:-24px; right:-40px; width:340px; height:340px; opacity:0.8;" viewBox="0 0 340 340" fill="none">
+        <circle cx="170" cy="170" r="168" stroke="#8A5A44" stroke-opacity="0.25" stroke-width="1"/>
+        <circle cx="170" cy="170" r="128" stroke="#C97B4A" stroke-opacity="0.3" stroke-width="1"/>
+      </svg>
+      <div class="hero-photo">
+        <img src="jane-headshot.jpg" alt="Portrait of Jane Neoh">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="section-head" style="margin-bottom:0;">
+      <p class="eyebrow">About Jane</p>
+      <h2>I've always been fascinated by people.</h2>
+    </div>
+    <div class="about-copy">
+      <p class="lead-line">Why do we repeat the same patterns, even when we know they're not serving us? Why do capable, intelligent people sometimes become their own biggest obstacle?</p>
+      <p>Those questions have shaped both my career and the way I coach. Over the past two decades, I've worked across education, entrepreneurship, financial services, corporate strategy and operations, and executive coaching — teaching, training, coaching and supporting people through career transitions, leadership challenges and personal growth.</p>
+      <p>My approach combines internationally accredited coaching, NLP and psychology-informed practices with a person-centred, trauma-informed and neurodivergent-friendly lens. Rather than quick fixes or one-size-fits-all advice, I create a space where people can better understand themselves, challenge unhelpful patterns, and make intentional decisions that align with who they are.</p>
+
+      <div class="quals">
+        <h3>Qualifications</h3>
+        <ul>
+          <li><span class="dot"></span> International Coaching Federation (ICF) Accredited Coach</li>
+          <li><span class="dot"></span> Executive Leadership Coach</li>
+          <li><span class="dot"></span> Certified NLP Practitioner</li>
+          <li><span class="dot"></span> Psychology Undergraduate</li>
+          <li><span class="dot"></span> 20+ years of teaching, training and coaching experience</li>
+          <li><span class="dot"></span> 15 years of leadership experience across entrepreneurship, financial services and corporate operations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROCESS ================= -->
+<section id="process" class="tint">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">How coaching works</p>
+      <h2>A space to understand yourself, before you try to change.</h2>
+    </div>
+    <div class="process-flow">
+      <div class="process-step">
+        <span class="step-index">01</span>
+        <h3>Start with a conversation</h3>
+        <p>A discovery call to understand where you are, what's not working, and whether we're the right fit to work together.</p>
+      </div>
+      <div class="process-step">
+        <span class="step-index">02</span>
+        <h3>Understand your patterns</h3>
+        <p>We explore the thinking, habits and history behind what's really going on — with a psychology-informed, trauma-aware lens.</p>
+      </div>
+      <div class="process-step">
+        <span class="step-index">03</span>
+        <h3>Build what lasts</h3>
+        <p>Ongoing sessions turn insight into intentional, sustainable change — grounded in who you already are, not who you think you should be.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHO IT'S FOR ================= -->
+<section id="for">
+  <div class="wrap for-grid">
+    <div class="section-head" style="margin-bottom:0;">
+      <p class="eyebrow">Who this is for</p>
+      <h2>For people who are capable — and ready to stop being their own obstacle.</h2>
+    </div>
+    <div>
+      <ul class="for-list">
+        <li><span class="ring-icon"></span> Leaders and professionals who want to think more clearly under pressure</li>
+        <li><span class="ring-icon"></span> Individuals navigating a career transition or leadership challenge</li>
+        <li><span class="ring-icon"></span> People who keep repeating patterns they know aren't serving them</li>
+        <li><span class="ring-icon"></span> Neurodivergent professionals looking for a coach who won't ask them to mask</li>
+        <li><span class="ring-icon"></span> Anyone who wants to communicate and lead with more self-awareness and confidence</li>
+      </ul>
+      <div class="for-note" style="margin-top:32px;">
+        <p class="eyebrow">A note on approach</p>
+        <p>This isn't about quick fixes. It's a person-centred, trauma-informed and neurodivergent-friendly space to challenge unhelpful patterns and make decisions that actually align with who you are.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OFFERS ================= -->
+<section id="offers" class="tint">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Ways to work together</p>
+      <h2>Choose the format that fits where you are.</h2>
+    </div>
+    <div class="offer-grid">
+      <div class="offer-card featured">
+        <p class="eyebrow">1:1 Coaching</p>
+        <h3>Individual coaching</h3>
+        <p>For professionals and individuals working through personal growth, career transitions, confidence and self-awareness — one on one, at your pace.</p>
+        <a class="offer-link" href="#cta">Book a discovery call →</a>
+      </div>
+      <div class="offer-card">
+        <p class="eyebrow">Corporate</p>
+        <h3>Executive &amp; leadership coaching</h3>
+        <p>For organisations investing in the people leading them — executive coaching engagements grounded in psychology-informed, sustainable leadership development.</p>
+        <a class="offer-link" href="#cta">Enquire for your team →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Client stories</p>
+      <h2>Placeholder quotes — swap in real testimonials when ready.</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <p class="quote">"Jane helped me see the pattern I'd been repeating for years without realising it. That awareness alone changed how I show up at work."</p>
+        <p class="attr">— First name, Role / Company</p>
+        <span class="placeholder-flag">Placeholder quote</span>
+      </div>
+      <div class="testi-card">
+        <p class="quote">"This wasn't generic leadership advice. It felt like coaching built for how my brain actually works."</p>
+        <p class="attr">— First name, Role / Company</p>
+        <span class="placeholder-flag">Placeholder quote</span>
+      </div>
+      <div class="testi-card">
+        <p class="quote">"I came in for a career transition and left with a much clearer sense of who I am and what I actually want."</p>
+        <p class="attr">— First name, Role / Company</p>
+        <span class="placeholder-flag">Placeholder quote</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL CTA ================= -->
+<section id="cta" class="final-cta tint">
+  <svg class="ring-motif" style="top:20%; left:50%; width:520px; height:520px; opacity:0.35; transform:translateX(-50%);" viewBox="0 0 500 500" fill="none">
+    <circle cx="250" cy="250" r="248" stroke="#8A5A44" stroke-opacity="0.15" stroke-width="1"/>
+    <circle cx="250" cy="250" r="190" stroke="#C97B4A" stroke-opacity="0.18" stroke-width="1"/>
+    <circle cx="250" cy="250" r="130" stroke="#8A5A44" stroke-opacity="0.15" stroke-width="1"/>
+  </svg>
+  <div class="wrap" style="position:relative; z-index:1;">
+    <p class="eyebrow" style="margin-bottom:16px;">Let's talk</p>
+    <h2>Ready to understand yourself deeply enough to change?</h2>
+    <p>Book a no-obligation discovery call to talk through where you are and whether coaching is the right next step.</p>
+    <a class="btn-primary" href="https://calendly.com/janeneohcoaching/discovery-call" target="_blank" rel="noopener">Book a discovery call</a>
+    <p class="cta-sub" style="margin-top:16px;">Placeholder Calendly link — replace with your real booking URL</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <span>© 2026 Jane Neoh Coaching</span>
+    <span>ICF Accredited · NLP Practitioner · Executive Leadership Coach</span>
+  </div>
+</footer>
+
+</body>
+</html>
